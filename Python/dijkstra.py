@@ -217,32 +217,21 @@ distdata = json.load(Dist)
 # Iterating through the json
 # list
 
-graph = Graph(264346)
+graph = Graph(264347)
+# GRAPH PLUS 1 BECAUSE IT STARTS FROM 1 INSTEAD OF 0
+
 for i in distdata:
     j = i.split(',')
-    graph.addEdge(j[0], j[1], distdata[i])
+    graph.addEdge(int(j[0]), int(j[1]), float(distdata[i]))
+# EVERY NODE INDEX WILL MINUS 1
 
-graph.dijkstra(0)
+graph.dijkstra(1)
 # Closing file
 G.close()
 Dist.close()
 
 # Driver program to test the above functions
 
-# graph.addEdge(0, 1, 4)
-# graph.addEdge(0, 7, 8)
-# graph.addEdge(1, 2, 8)
-# graph.addEdge(1, 7, 11)
-# graph.addEdge(2, 3, 7)
-# graph.addEdge(2, 8, 2)
-# graph.addEdge(2, 5, 4)
-# graph.addEdge(3, 4, 9)
-# graph.addEdge(3, 5, 14)
-# graph.addEdge(4, 5, 10)
-# graph.addEdge(5, 6, 2)
-# graph.addEdge(6, 7, 1)
-# graph.addEdge(6, 8, 6)
-# graph.addEdge(7, 8, 7)
 
  
 # This code is contributed by Divyanshu Mehta

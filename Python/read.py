@@ -2,7 +2,7 @@
 import json
 
 G = open('G.json')
-Dist = open('Dist.json')
+Dist = open('DistTest.json')
 
 # returns JSON object as
 # a dictionary
@@ -13,7 +13,7 @@ distdata = json.load(Dist)
 
 for i in distdata:
     j = i.split(',')
-    print(j[0])
+    print(int(j[0]), int(j[1]), float(distdata[i]))
     # print(distdata[i])
     # print(mapdata[i])
  
