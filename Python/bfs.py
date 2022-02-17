@@ -2,7 +2,7 @@
 # from a given source vertex. BFS(int s)
 # traverses vertices reachable from s.
 from collections import defaultdict
- 
+import json
 # This class represents a directed graph
 # using adjacency list representation
 class Graph:
@@ -51,16 +51,35 @@ class Graph:
  
 # Create a graph given in
 # the above diagram
-g = Graph()
-g.addEdge(0, 1)
-g.addEdge(0, 2)
-g.addEdge(1, 2)
-g.addEdge(2, 0)
-g.addEdge(2, 3)
-g.addEdge(3, 3)
+G = open('G.json')
+Dist = open('Dist.json')
+Cost = open('Cost.json')
+
+# returns JSON object as
+# a dictionary
+mapdata = json.load(G)
+distdata = json.load(Dist)
+costdata = json.load(Cost)
+
+# Iterating through the json
+# list
+
+graph = Graph()
+# GRAPH PLUS 1 BECAUSE IT STARTS FROM 1 INSTEAD OF 0
+
+for i in distdata:
+    j = i.split(',')
+    graph.addEdge(int(j[0]), int(j[1]), float(distdata[i]))
+# EVERY NODE INDEX WILL MINUS 1
+
+graph.BFS(2)
+# Closing file
+G.close()
+Dist.close()
+Cost.close()
  
 print ("Following is Breadth First Traversal"
                   " (starting from vertex 2)")
-g.BFS(2)
+
  
 # This code is contributed by Neelam Yadav

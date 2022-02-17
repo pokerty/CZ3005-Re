@@ -206,14 +206,17 @@ class Graph():
         printArr(dist,V)
  
  
- # Opening JSON file
+# Opening JSON file
 G = open('G.json')
 Dist = open('Dist.json')
+Cost = open('Cost.json')
 
 # returns JSON object as
 # a dictionary
 mapdata = json.load(G)
 distdata = json.load(Dist)
+costdata = json.load(Cost)
+
 # Iterating through the json
 # list
 
@@ -229,6 +232,7 @@ graph.dijkstra(1)
 # Closing file
 G.close()
 Dist.close()
+Cost.close()
 
 # Driver program to test the above functions
 
