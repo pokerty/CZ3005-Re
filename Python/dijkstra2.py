@@ -11,7 +11,7 @@ class Graph:
         self.edges[u][v] = weight
         self.edges[v][u] = weight
 
-def dijkstra(graph, start_vertex):
+def dijkstra(graph, start_vertex, end_vertex):
     D = {v:float('inf') for v in range(graph.v)}
     D[start_vertex] = 0
 
@@ -20,6 +20,8 @@ def dijkstra(graph, start_vertex):
 
     while not pq.empty():
         (dist, current_vertex) = pq.get()
+        if current_vertex == end_vertex:
+            return D[end_vertex]
         graph.visited.append(current_vertex)
 
         for neighbor in range(graph.v):
@@ -36,6 +38,7 @@ def dijkstra(graph, start_vertex):
 # Opening JSON file
 G = open('G.json')
 Dist = open('Dist.json')
+# Dist = open('DistTest.json')
 Cost = open('Cost.json')
 
 # returns JSON object as
@@ -48,6 +51,7 @@ costdata = json.load(Cost)
 # list
 
 g = Graph(264347)
+# g = Graph(25)
 # GRAPH PLUS 1 BECAUSE IT STARTS FROM 1 INSTEAD OF 0
 
 for i in distdata:
@@ -77,6 +81,6 @@ Cost.close()
 # g.add_edge(6, 7, 1)
 # g.add_edge(7, 8, 3) 
 
-D = dijkstra(g, 1)
+D = dijkstra(g, 1, 12)
 
-print(D)
+print("The distance from 1 to 50 is: ", D)
