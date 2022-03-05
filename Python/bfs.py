@@ -6,17 +6,21 @@ import json
  
 # This class represents a directed graph
 # using adjacency list representation
+
+def pairlist():
+    return [[], []]
 class Graph:
  
     # Constructor
     def __init__(self):
  
         # default dictionary to store graph
-        self.graph = defaultdict(list)
+        self.graph = defaultdict(pairlist)
  
     # function to add an edge to graph
-    def addEdge(self,u,v):
-        self.graph[u].append(v)
+    def addEdge(self,u,v,energy):
+        self.graph[u][0].append(v)
+        self.graph[u][1].append(energy)
  
     def backtrace(self, parent, start, end):
         path = [end]
@@ -33,7 +37,8 @@ class Graph:
     def BFS(self, s, d):
         # dict for parent node
         parent = {}
- 
+        cost = 0
+
         # Mark all the vertices as not visited
         visited = [False] * (max(self.graph) + 1)
  
@@ -45,12 +50,18 @@ class Graph:
         cur = s;  #mark current node
         queue.append(cur)
         visited[cur] = True
+        
  
         while queue:
  
             # Dequeue a vertex from
-            # queue and print it
+            # queue and print  it
+            pre = cur  #store previous node
             cur = queue.pop(0)
+            
+            #find index of new node in first list, then match it to index in 2nd list for energy cost
+            cost += self.graph[pre][1][self.graph[pre][0].index(cur)] 
+
             # print("it is traversing", cur) #test
             # print (cur, end = " ")
             if cur == d: #if dest found
@@ -64,16 +75,18 @@ class Graph:
                 for i in path:
                     print("->", i, end=" ")
                 # self.backtrace(parent, s, d)
-                return 
+                return cost
  
             # Get all adjacent vertices of the
             # dequeued vertex s. If a adjacent
             # has not been visited, then mark it
             # visited and enqueue it
-            for i in self.graph[cur]:
+            for i in self.graph[cur][0]:
                 if visited[i] == False:
+
                     parent[i] = cur #add parent of cur node to dict
                     # print ("parent of", i  ,"is", parent[i]) #test
+
                     queue.append(i)
                     visited[i] = True
  
@@ -99,8 +112,7 @@ graph = Graph()
 
 for i in costdata:
     j = i.split(',')
-    graph.addEdge(int(j[0]), int(j[1]))
-    # graph.addEdge(int(j[0]), int(j[1]), int(costdata[i]))
+    graph.addEdge(int(j[0]), int(j[1]), int(costdata[i]))
 # EVERY NODE INDEX WILL MINUS 1
 
 print ("The breadth first traversal path for 1 to 50 is")

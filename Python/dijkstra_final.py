@@ -106,7 +106,7 @@ class Heap():
             self.swapMinHeapNode(i, (i - 1)//2 )
  
             # move to parent index
-            i = (i - 1) // 2;
+            i = (i - 1) // 2
  
     # A utility function to check if a given
     # vertex 'v' is in min heap or not
@@ -159,7 +159,7 @@ class Graph():
     # The main function that calculates distances
     # of shortest paths from src to all vertices.
     # It is a O(ELogV) function
-    def dijkstra(self, src,dest):
+    def task1(self, src, dest):
  
         V = self.V  # Get the number of vertices in graph
         dist = []   # dist values used to pick minimum
@@ -185,7 +185,7 @@ class Graph():
         minHeap.decreaseKey(src, dist[src])
  
         # Initially size of min heap is equal to V
-        minHeap.size = V;
+        minHeap.size = V
  
         # In the following loop,
         # min heap contains all nodes
@@ -241,7 +241,7 @@ for i in distdata:
     graph.addEdge(int(j[0]), int(j[1]), float(distdata[i]))
 # EVERY NODE INDEX WILL MINUS 1
 
-graph.dijkstra(1,50)
+graph.task1(1,50)
 # Closing file
 Dist.close()
 
